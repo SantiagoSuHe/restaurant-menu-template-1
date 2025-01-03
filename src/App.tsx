@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { menuData } from './i18n/menuData';
 import Navigation from './components/Navigation';
 import MenuSection from './components/MenuSection';
@@ -42,6 +42,11 @@ function RestaurantApp() {
 }
 
 function App() {
+  useEffect(() => {
+    const preferredLanguage = navigator.language.startsWith('es') ? 'es' : 'en';
+    window.location.replace(`/${preferredLanguage}`);
+  }, []);
+
   return (
     <Routes>
       <Route path="/:lang" element={<RestaurantApp />} />
