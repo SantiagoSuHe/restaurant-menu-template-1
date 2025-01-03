@@ -42,15 +42,13 @@ function RestaurantApp() {
 }
 
 function App() {
-  useEffect(() => {
-    const preferredLanguage = navigator.language.startsWith('es') ? 'es' : 'en';
-    window.location.replace(`/${preferredLanguage}`);
-  }, []);
+  const preferredLanguage = navigator.language.startsWith('es') ? 'es' : 'en';
+  const initialPath = window.location.pathname === '/' ? `/${preferredLanguage}` : window.location.pathname;
 
   return (
     <Routes>
       <Route path="/:lang" element={<RestaurantApp />} />
-      <Route path="/" element={<Navigate to="/en" replace />} />
+      <Route path="/" element={<Navigate to={initialPath} replace />} />
     </Routes>
   );
 }
